@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: [:create]
+  resources :cool_sites, only: [:index, :new, :create]
 
   root 'topics#index'
 

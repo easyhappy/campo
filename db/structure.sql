@@ -132,6 +132,42 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: cool_sites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cool_sites (
+    id integer NOT NULL,
+    user_id integer,
+    site_node_id integer,
+    website character varying(255),
+    title character varying(255),
+    "desc" text,
+    state integer DEFAULT 0,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: cool_sites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cool_sites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cool_sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cool_sites_id_seq OWNED BY cool_sites.id;
+
+
+--
 -- Name: friend_sites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -282,6 +318,38 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: site_nodes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE site_nodes (
+    id integer NOT NULL,
+    name character varying(255),
+    weight integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: site_nodes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE site_nodes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: site_nodes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE site_nodes_id_seq OWNED BY site_nodes.id;
+
+
+--
 -- Name: subscriptions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -425,6 +493,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cool_sites ALTER COLUMN id SET DEFAULT nextval('cool_sites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY friend_sites ALTER COLUMN id SET DEFAULT nextval('friend_sites_id_seq'::regclass);
 
 
@@ -447,6 +522,13 @@ ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regcl
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY site_nodes ALTER COLUMN id SET DEFAULT nextval('site_nodes_id_seq'::regclass);
 
 
 --
@@ -495,6 +577,14 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: cool_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cool_sites
+    ADD CONSTRAINT cool_sites_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: friend_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -524,6 +614,14 @@ ALTER TABLE ONLY likes
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: site_nodes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY site_nodes
+    ADD CONSTRAINT site_nodes_pkey PRIMARY KEY (id);
 
 
 --
@@ -755,4 +853,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140620090118');
 INSERT INTO schema_migrations (version) VALUES ('20140623033657');
 
 INSERT INTO schema_migrations (version) VALUES ('20140623065349');
+
+INSERT INTO schema_migrations (version) VALUES ('20150817095133');
+
+INSERT INTO schema_migrations (version) VALUES ('20150817110121');
 

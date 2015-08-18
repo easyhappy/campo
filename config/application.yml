@@ -1,0 +1,13 @@
+# config/application.yml
+defaults: &defaults
+  site_index_html: "下面列出了Swift开发相关的网站。如果你知道还有不在此列表的，请帮忙补充。"
+
+development:
+  <<: *defaults
+  neat_setting: 800
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
